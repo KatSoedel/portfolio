@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ByKat Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Antonio', sans-serif;
+      background: #fff;
+      color: #000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #fff;
+    }
+
+    .logo {
+      font-family: 'Anton', sans-serif;
+      font-size: 2rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 2px solid transparent;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: 'Antonio', sans-serif;
+    }
+
+    .nav-btn.active {
+      background-color: #333;
+      color: white;
+    }
+
+    .nav-btn:hover {
+      border-color: #333;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-family: 'Antonio', sans-serif;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      color: #000;
+    }
+
+    .tab-btn.active::before {
+      content: "[ ";
+      color: #000;
+    }
+
+    .tab-btn.active::after {
+      content: " ]";
+      color: #000;
+    }
+
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    .slider {
+      display: flex;
+      gap: 1rem;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .project-card {
+      min-width: 300px;
+      flex: 0 0 auto;
+      background-color: #f4f4f4;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .project-img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      border: 1px solid #333;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      z-index: 1;
+    }
+
+    .slider-btn.left {
+      left: 0.5rem;
+    }
+
+    .slider-btn.right {
+      right: 0.5rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">ByKat</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><button class="nav-btn active">Work</button></li>
+        <li><button class="nav-btn">About</button></li>
+        <li><button class="nav-btn">Contact</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tabs">
+      <button class="tab-btn active" data-filter="all">All</button>
+      <button class="tab-btn" data-filter="branding">Branding</button>
+      <button class="tab-btn" data-filter="web">Web Development</button>
+      <button class="tab-btn" data-filter="research">Marketing Research</button>
+    </section>
+
+    <section class="slider-container">
+      <button class="slider-btn left">&#10094;</button>
+      <div class="slider" id="project-slider">
+        <div class="project-card" data-category="branding">
+          <img src="project1.png" alt="Branding Project" class="project-img" />
+          <h2>Brand Refresh</h2>
+        </div>
+        <div class="project-card" data-category="web">
+          <img src="project2.png" alt="Web Project" class="project-img" />
+          <h2>Landing Page</h2>
+        </div>
+        <div class="project-card" data-category="research">
+          <img src="project3.png" alt="Research Project" class="project-img" />
+          <h2>Audience Report</h2>
+        </div>
+        <div class="project-card" data-category="branding">
+          <img src="project4.png" alt="Extra Project" class="project-img" />
+          <h2>Packaging</h2>
+        </div>
+      </div>
+      <button class="slider-btn right">&#10095;</button>
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox hidden">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="Expanded View">
+  </div>
+
+  <script>
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const closeBtn = document.querySelector('.close');
+    document.querySelectorAll('.project-img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.classList.remove('hidden');
+        lightboxImg.src = img.src;
+      });
+    });
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.add('hidden');
+    });
+
+    // Slider navigation
+    const slider = document.getElementById('project-slider');
+    const leftBtn = document.querySelector('.slider-btn.left');
+    const rightBtn = document.querySelector('.slider-btn.right');
+    let scrollAmount = 0;
+
+    rightBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+    leftBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+
+    // Tab filtering
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.tab-btn.active')?.classList.remove('active');
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.project-card').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
