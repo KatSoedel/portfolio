@@ -82,14 +82,14 @@ img {
   font-size: 18px;
   font-family: 'Antonio', sans-serif;
   cursor: pointer;
-  background-color: #EEEFF2;
+  background-color: #ffffff;
   color: #000000;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tab-btn.active {
-  background-color: #000000;
-  color: #FFE2F3;
+  background-color: #ffffff;
+  color: #000000;
   font-weight: bold;
 }
 
@@ -165,7 +165,7 @@ footer {
 .footer-nav {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
 }
 
