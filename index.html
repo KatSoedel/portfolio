@@ -3,178 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ByKat Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Antonio', sans-serif;
-      background: #fff;
-      color: #000;
-    }
-    header, footer {
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Anton', sans-serif;
-      font-size: 2rem;
-    }
-    nav a {
-      margin-left: 1rem;
-      text-decoration: none;
-      color: #000;
-      font-weight: 400;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      background-color: #f1f1f1;
-    }
-    .hero {
-      font-family: 'Anton', sans-serif;
-      font-size: 10rem;
-      line-height: 1;
-      padding: 0 2rem;
-    }
-    .filters {
-      display: flex;
-      gap: 1.5rem;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-    }
-    .filters button {
-      background: none;
-      border: none;
-      font-family: 'Antonio', sans-serif;
-      font-weight: 300;
-      cursor: pointer;
-      color: #aaa;
-    }
-    .filters .active {
-      color: #000;
-      font-weight: 600;
-      border-bottom: 2px solid #000;
-    }
-    .projects {
-      padding: 1rem 2rem;
-    }
-    .project {
-      border-top: 1px solid #000;
-      padding: 1.5rem 0;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .project h2 {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      margin: 0;
-    }
-    .project img {
-      width: 250px;
-      height: auto;
-      margin-top: 1rem;
-    }
-    .industry {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 1rem;
-    }
-    .cta {
-      padding: 4rem 2rem;
-      text-align: left;
-    }
-    .cta h2 {
-      font-family: 'Anton', sans-serif;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .cta p {
-      font-size: 1rem;
-      margin: 0.25rem 0;
-    }
-    footer nav a {
-      margin: 0 0.5rem;
-    }
-  </style>
-  <script>
-    function filterProjects(type) {
-      document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.filters button[data-type="${type}"]`).classList.add('active');
-      document.querySelectorAll('.project').forEach(proj => {
-        proj.style.display = (type === 'all' || proj.dataset.type === type) ? 'flex' : 'none';
-      });
-    }
-    window.onload = () => filterProjects('all');
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="logo">ByKat</div>
+  <header class="navbar">
+    <div class="logo">Kathleen</div>
     <nav>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <ul class="nav-links">
+        <li><button class="nav-btn active">Work</button></li>
+        <li><button class="nav-btn">About</button></li>
+        <li><button class="nav-btn">Contact</button></li>
+      </ul>
     </nav>
   </header>
 
   <main>
-    <h1 class="hero">Portfolio</h1>
-    <div class="filters">
-      <button class="active" data-type="all" onclick="filterProjects('all')">[ All ]</button>
-      <button data-type="branding" onclick="filterProjects('branding')">Branding</button>
-      <button data-type="web" onclick="filterProjects('web')">Web Development</button>
-      <button data-type="research" onclick="filterProjects('research')">Marketing Research</button>
+    <section class="hero">Portfolio</section>
+
+    <div class="tabs">
+      <button class="tab-btn active">All</button>
+      <button class="tab-btn">Branding</button>
+      <button class="tab-btn">UI/UX</button>
+      <button class="tab-btn">Web</button>
     </div>
 
-    <section class="projects" id="work">
-      <div class="project" data-type="branding">
-        <div>
-          <h2>AI Startup Marketing</h2>
-          <p>2025</p>
-          <p class="industry">Industry<br>Tech / Education</p>
+    <section class="project-list">
+      <div class="project-card">
+        <div class="project-info">
+          <h2>Project Name</h2>
+          <p>2024</p>
+          <div class="project-meta">
+            <span class="label">Industry:</span>
+            <span class="value">Fashion</span>
+          </div>
         </div>
-        <img src="wendway.png" alt="Wendway Logo">
+        <a href="project1.html">
+          <img class="project-img" src="project1-thumbnail.jpg" alt="Project Thumbnail">
+        </a>
       </div>
-
-      <div class="project" data-type="research">
-        <div>
-          <h2>University Institute Case</h2>
-          <p>2025</p>
-          <p class="industry">Industry<br>Education</p>
-        </div>
-        <img src="quizwrite.png" alt="Writing for Nonprofits Visual">
-      </div>
-
-      <div class="project" data-type="web">
-        <div>
-          <h2>Record Shop Google Ads Campaign</h2>
-          <p>2025</p>
-          <p class="industry">Industry<br>Retail</p>
-        </div>
-        <img src="recordshop.png" alt="Google Ads Campaign">
-      </div>
-    </section>
-
-    <section class="cta" id="contact">
-      <h2>Let’s Bring Ideas to Life</h2>
-      <p>kathleensoedel@gmail.com</p>
-      <p>+1(812) 378 9778</p>
-      <nav>
-        <a href="#">LinkedIn</a>
-      </nav>
+      <!-- More projects can be added similarly -->
     </section>
   </main>
 
   <footer>
-    <div>&copy; 2025 ByKat</div>
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="footer-text">Let's Bring Ideas to Life</div>
+    <div class="footer-nav">
+      <ul class="nav-links">
+        <li><button class="nav-btn">Work</button></li>
+        <li><button class="nav-btn">About</button></li>
+        <li><button class="nav-btn">Contact</button></li>
+      </ul>
+      <a class="linkedin-btn" href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+    </div>
   </footer>
 </body>
 </html>
